@@ -7,4 +7,12 @@ function connectToDatabase($databaseName){
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $conn;
 }
+
+function selectAll($connection, $tableName, $attribute){
+    $query = "SELECT $attribute FROM `$tableName`;";
+    $q = $connection->query($query);
+    $results = $q->fetchAll();
+    return $results;
+}
+
 ?>

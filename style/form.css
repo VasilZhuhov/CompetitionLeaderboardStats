@@ -13,7 +13,8 @@
 	margin-bottom: 8px;
 }
 .form input[type="text"],
-.form input[type="email"]
+.form input[type="email"],
+.form select
 {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	background: rgba(255,255,255,.1);
@@ -35,6 +36,7 @@
 }
 .form input[type="text"]:focus,
 .form input[type="email"]:focus,
+.form select:focus,
 .form textarea:focus,
 .form select:focus{
 	background: #d2d9dd;
@@ -76,4 +78,9 @@ button
 .form button:hover
 {
 	background: #109177;
+}
+
+.hidden
+{
+	display:none;
 }
