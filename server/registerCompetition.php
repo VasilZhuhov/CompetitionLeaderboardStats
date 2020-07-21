@@ -30,15 +30,8 @@
             VALUES ('$name', '$namePath', '$scorePath', '$rankPath')";
             $conn->exec($query);
         }
-        $comp_config = fopen("../front-end/comp_config.json", "w") or die("Unable to open file!");
-        $config = "{ \"url\":  \"$url\", \"namePath\":  \"$namePath\", \"scorePath\": \"$scorePath\"', \"rankPath\": \"$rankPath\"} ";
 
-        fwrite($comp_config, $config);
-
-        fclose($comp_config);
-
-
-        include './getCompetitionStats.php';
+        include '../server/getCompetitionStats.php';
     }
 
 ?>

@@ -9,9 +9,8 @@ function showDataGraph()
         let xhr = new XMLHttpRequest();
 
         xhr.open('POST', 'data.php');
-        xhr.onload = function() 
+        xhr.onload = function()
         {
-            console.log(xhr.responseText);
             let data = JSON.parse(xhr.responseText);
             let name = [];
             let points = [];

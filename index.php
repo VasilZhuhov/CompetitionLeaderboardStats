@@ -7,7 +7,7 @@
         </style>
     </head>
     <body>
-        <form class="form" action="./server/registerCompetition.php" method="POST">
+        <form class="form" action="./graphic/data_graph.php" method="POST">
             <input type="text" name="name" placeholder="Enter name of competition"><br>
             <input type="text" name="url" placeholder="Enter url of competition"><br>
             <input type="text" name="namePath" placeholder="Enter path to the name of competitor"><br>
@@ -23,6 +23,7 @@
                     }
                 ?>
             </select>
+            <input type="text" name="trackingTime" placeholder="Enter time to follow competition"><br>
             <button type="submit">Enter</button>
 
         </form>

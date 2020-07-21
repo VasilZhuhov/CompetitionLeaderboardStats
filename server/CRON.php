@@ -5,9 +5,8 @@
     $rankPath = $argv[4];
     $name = $argv[5];
 
-    $current_res = fopen("../front-end/res.json", "w") or die("Unable to open file!");
-
-    $command = 'node scriping.js -u "' . $url . '" -n "' . $namePath . '" -p "' . $scorePath . '" -r "' . $rankPath . '"';
+    $current_res = fopen("./res.json", "w") or die("Unable to open file!");
+    $command = 'node ../server/scriping.js -u "' . $url . '" -n "' . $namePath . '" -p "' . $scorePath . '" -r "' . $rankPath . '"';
     $output = shell_exec($command);
     $manage = json_decode($output, true);
     fwrite($current_res, $output);
@@ -19,7 +18,6 @@
     $conn = connectToDatabase('competitionTracker');
 
     $query = "SELECT min(id) FROM parsers WHERE name = '$name'";
-    //echo $query;
     $q = $conn -> query($query);
     $id = $q -> fetch()[0];
 
@@ -45,17 +43,9 @@
         $q = $conn -> query($query);
         $participantId = $q -> fetch()[0];
 
-        echo "id = $participantId";
-        echo "\n\n";
-
         $query = "INSERT INTO competition_participants (competitionId, participantId)
         VALUES ('$id', '$participantId')";
         $conn -> exec($query);
     }
 
-    // $query = "SELECT * FROM Participants"
-
-// bash CRON.sh "https://www.hackerrank.com/contests/practice-7-sda/leaderboard/1" ".leaderboard > .table-wrap > #leaders > .leaderboard-list-view > .leaderboard-row > .span-flex-4 > p" ".leaderboard > .table-wrap > #leaders > .leaderboard-list-view > .leaderboard-row > .span-flex-3 > p" ".leaderboard > .table-wrap > #leaders > .leaderboard-list-view > .leaderboard-row > .text-center > p"
-
 ?>
-

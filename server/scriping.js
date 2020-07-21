@@ -12,14 +12,14 @@ const getStats = async (url, name, point, rank) => {
             const result = response.map(r => {
                 return r.innerText;
             });
-        
+
             return result;
         };
 
         const points = selectData(point); // .leaderboard > .table-wrap > #leaders > .leaderboard-list-view > .leaderboard-row > .span-flex-3 > p
         const names = selectData(name); // .leaderboard > .table-wrap > #leaders > .leaderboard-list-view > .leaderboard-row > .span-flex-4 > p
         const ranks = selectData(rank); // .leaderboard > .table-wrap > #leaders > .leaderboard-list-view > .leaderboard-row > .text-center > p
-        
+
         return {points, names, ranks};
     }, name, rank, point);
     browser.close();
