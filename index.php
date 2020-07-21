@@ -13,16 +13,9 @@
             <input type="text" name="namePath" placeholder="Enter path to the name of competitor"><br>
             <input type="text" name="scorePath" placeholder="Enter path to the score of competitor"><br>
             <input type="text" name="rankPath" placeholder="Enter path to the rank of competitor"><br>
+            <input type="text" name="trackingTime" placeholder="Enter tracking time of competition in minutes"><br>
             <label for="useExisting">Use existing parser:</label>
             <input type="checkbox" name="useExisting" id="useExisting" onclick="showSelect()">
-            <select name="selectedParser" id="selectedParser" class="hidden">
-                <?php
-                    include 'available_options.php';
-                    foreach($options as &$option){
-                        echo '<option value="'.$option["name"].'">'.$option["name"].'</option>';
-                    }
-                ?>
-            </select>
             <button type="submit">Enter</button>
 
         </form>

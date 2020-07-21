@@ -7,6 +7,8 @@
         $namePath = $_POST['namePath'];
         $scorePath = $_POST['scorePath'];
         $rankPath = $_POST['rankPath'];
+        $trackingTime = $_POST['trackingTime'];
+
         $useExisting = false;
         $parser;
         $conn = connectToDatabase('competitionTracker');
