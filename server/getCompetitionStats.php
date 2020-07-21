@@ -35,9 +35,9 @@
         print("<pre>".print_r($manage, true)."</pre>");
     }
 
-    function schedule($url, $namePath, $scorePath, $rankPath){
+    function schedule($url, $namePath, $scorePath, $rankPath, $name){
         try {
-            $c = 'bash CRON.sh "' . $url . '" "' . $namePath . '" "' . $scorePath . '" "' . $rankPath . '" > /dev/null 2>&1 &';
+            $c = 'bash CRON.sh "' . $url . '" "' . $namePath . '" "' . $scorePath . '" "' . $rankPath . '" "' . $name . '"> /dev/null 2>&1 &';
             $res = shell_exec($c);
             echo $res;
         }
@@ -46,7 +46,7 @@
         }
     }
 
-    schedule($url, $namePath, $scorePath, $rankPath);
+    schedule($url, $namePath, $scorePath, $rankPath, $name);
 
 
 
