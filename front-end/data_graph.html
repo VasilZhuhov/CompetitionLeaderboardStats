@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Creating Dynamic Data Graph using PHP and Chart.js</title>
+<style type="text/css">
+
+#chart-container {
+    width: 100%;
+    height: auto;
+}
+</style>
+<script type="text/javascript" src="../server/node_modules/chart.js/dist/Chart.min.js"></script>
+
+
+</head>
+<body>
+    <div id="chart-container">
+        <canvas id="graphCanvas"></canvas>
+    </div>
+
+    <script>
+
+        window.onload = function() {
+            showGraph();
+            setInterval(showGraph, 5000);
+        };
+
+        function showGraph()
+        {
+            {
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('POST', 'data.php');
+                xhr.onload = function() 
+                {
+                    var data = JSON.parse(xhr.responseText);
+                    var name = [];
+                    var points = [];
+
+                    for (var i in data) {
+                        name.push(data[i].name);
+                        points.push(data[i].points);
+                    }
+
+                    let chartdata = {
+                        labels: name,
+                        datasets: [
+                            {
+                                label: 'Competition Points',
+                                backgroundColor: '#49e2ff',
+                                borderColor: '#46d5f1',
+                                hoverBackgroundColor: '#CCCCCC',
+                                hoverBorderColor: '#666666',
+                                data: points
+                            }
+                        ]
+                    };
+
+                    var graphTarget = document.getElementById("graphCanvas");
+
+                    var barGraph = new Chart(graphTarget, {
+                        type: 'bar',
+                        data: chartdata,
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                        display: true,
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                            }
+                        }
+                    });
+                };
+                xhr.send();
+            }
+        }
+        </script>
+
+
+</body>
+</html>

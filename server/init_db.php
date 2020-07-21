@@ -4,15 +4,15 @@
  $password="#XQ5LFf.k9$5pMt";
 
  try {
-    // $conn = new PDO("mysql:host=$servername", $username, $password);
-    // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // try{
-    //   $sql = "CREATE DATABASE competitionTracker";
-    //   $conn->exec($sql);
-    //   echo "Database is created successfully!";
-    // } catch(PDOException $e) {
-    //   echo "Database is already created!";
-    // }
+    $conn = new PDO("mysql:host=$servername", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    try{
+      $sql = "CREATE DATABASE competitionTracker";
+      $conn->exec($sql);
+      echo "Database is created successfully!";
+    } catch(PDOException $e) {
+      echo "Database is already created!";
+    }
 
     $conn = new PDO("mysql:host=$servername;dbname=competitionTracker", $username, $password);
     $tableSQL = "CREATE TABLE IF NOT EXISTS parsers(
