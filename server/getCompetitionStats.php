@@ -35,9 +35,10 @@
         print("<pre>".print_r($manage, true)."</pre>");
     }
 
-    function schedule(){
+    function schedule($url, $namePath, $scorePath, $rankPath){
         try {
-            $res = shell_exec("CRON.sh");
+            $c = 'bash CRON.sh "' . $url . '" "' . $namePath . '" "' . $scorePath . '" "' . $rankPath . '" > /dev/null 2>&1 &';
+            $res = shell_exec($c);
             echo $res;
         }
         catch(T_STRING $e) {
@@ -45,7 +46,7 @@
         }
     }
 
-    schedule();
+    schedule($url, $namePath, $scorePath, $rankPath);
 
 
 
