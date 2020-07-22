@@ -1,6 +1,6 @@
 window.onload = function() {
     showDataGraph();
-    setInterval(showDataGraph, 5000);
+    setInterval(showDataGraph, 10000);
 };
 
 function showDataGraph()

@@ -13,6 +13,7 @@
 
 </head>
 <body>
+    <h1 class="center-text"><?php echo $_POST['name'] ?></h1>
     <div id="chart-container">
         <canvas id="graphCanvas"></canvas>
     </div>

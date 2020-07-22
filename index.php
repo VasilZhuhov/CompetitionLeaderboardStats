@@ -17,7 +17,7 @@
             <input type="checkbox" name="useExisting" id="useExisting" onclick="showSelect()">
             <select name="selectedParser" id="selectedParser" class="hidden">
                 <?php
-                    include 'available_options.php';
+                    include './available_options.php';
                     foreach($options as &$option){
                         echo '<option value="'.$option["name"].'">'.$option["name"].'</option>';
                     }

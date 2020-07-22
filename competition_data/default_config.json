@@ -14,5 +14,6 @@
       "14": "DarkViolet"
     },
     "popularity-number-change": 20,
-    "top-offset": 5
+    "top-offset": 5,
+    "refreshRateInSeconds": 20
   }

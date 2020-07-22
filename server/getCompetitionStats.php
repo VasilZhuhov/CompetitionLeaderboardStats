@@ -1,7 +1,10 @@
 <?php
     function schedule($url, $namePath, $scorePath, $rankPath, $name, $minutes){
         try {
-            $c = 'bash ../server/CRON.sh "' . $url . '" "' . $namePath . '" "' . $scorePath . '" "' . $rankPath . '" "' . $name . '" "' . $minutes . '" > /dev/null 2>&1 &';
+            $defaultConfig = file_get_contents("../competition_data/default_config.json");
+            $defaultConfigDecoded = json_decode($defaultConfig);
+            $refreshRate = $defaultConfig->refreshRateInSeconds;
+            $c = 'bash ../server/CRON.sh "' . $url . '" "' . $namePath . '" "' . $scorePath . '" "' . $rankPath . '" "' . $name . '" "' . $minutes . '" "'. $refreshRate .'" > /dev/null 2>&1 &';
             $res = shell_exec($c);
             echo $res;
         }

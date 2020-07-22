@@ -50,17 +50,17 @@
 
     // ---------------------------------------
     // feed data into $name.json
-
     $file = fopen("../competition_data/$name.json", "a") or die("Unable to open file!");
+
     $data = file_get_contents("../competition_data/$name.json");
-    
+
     $defaultConfig = file_get_contents("../competition_data/default_config.json");
     $defaultConfigDecoded = json_decode($defaultConfig);
 
     $defaultJSON = "{\"data\":[], \"config\": $defaultConfig}";
     // $defaultJSONDecoded = json_decode($defaultJSON);
 
-    
+
     if(strlen($data) == 0){
         $data = $defaultJSON;
     }
@@ -95,7 +95,7 @@
         $currentStandings -> $currentName = $participantName;
         $currentStandings -> $currentValue = $score;
 
-        
+
         $counter += 1;
     }
     array_push($dataDecoded -> data, $currentStandings);
