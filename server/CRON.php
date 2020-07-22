@@ -15,7 +15,7 @@
     fclose($current_res);
 
     include '../helpers/db.php';
-    $conn = connectToDatabase('competitionTracker');
+    $conn = connectToDatabase();
 
     $query = "SELECT min(id) FROM parsers WHERE name = '$name'";
     $q = $conn -> query($query);

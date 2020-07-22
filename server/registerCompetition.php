@@ -11,8 +11,7 @@
 
         $useExisting = false;
         $parser;
-        $conn = connectToDatabase('competitionTracker');
-
+        $conn = connectToDatabase();
         if(array_key_exists("useExisting", $_POST)){
             $useExisting = true;
             $query = 'SELECT * FROM Parsers WHERE name="'.$_POST['selectedParser'].'";';

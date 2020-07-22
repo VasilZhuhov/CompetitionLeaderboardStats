@@ -1,5 +1,5 @@
 <?php
     include "helpers/db.php";
-    $conn = connectToDatabase('competitionTracker');
+    $conn = connectToDatabase();
     $options = selectAll($conn, 'parsers', 'name');
 ?>
