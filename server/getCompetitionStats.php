@@ -3,7 +3,7 @@
         try {
             $defaultConfig = file_get_contents("../competition_data/default_config.json");
             $defaultConfigDecoded = json_decode($defaultConfig);
-            $refreshRate = $defaultConfig->refreshRateInSeconds;
+            $refreshRate = $defaultConfigDecoded->refreshRateInSeconds;
             $c = 'bash ../server/CRON.sh "' . $url . '" "' . $namePath . '" "' . $scorePath . '" "' . $rankPath . '" "' . $name . '" "' . $minutes . '" "'. $refreshRate .'" > /dev/null 2>&1 &';
             $res = shell_exec($c);
             echo $res;
