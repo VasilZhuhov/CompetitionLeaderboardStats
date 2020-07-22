@@ -10,7 +10,7 @@
     $output = shell_exec($command);
     $manage = json_decode($output, true);
     fwrite($current_res, $output);
-    print("<pre>".print_r($manage, true)."</pre>");
+    // print("<pre>".print_r($manage, true)."</pre>");
 
     fclose($current_res);
 
@@ -47,5 +47,66 @@
         VALUES ('$id', '$participantId')";
         $conn -> exec($query);
     }
+
+    // ---------------------------------------
+    // feed data into $name.json
+
+    $file = fopen("../competition_data/$name.json", "a") or die("Unable to open file!");
+    $data = file_get_contents("../competition_data/$name.json");
+    
+    $defaultConfig = file_get_contents("../competition_data/default_config.json");
+    $defaultConfigDecoded = json_decode($defaultConfig);
+
+    $defaultJSON = "{\"data\":[], \"config\": $defaultConfig}";
+    // $defaultJSONDecoded = json_decode($defaultJSON);
+
+    
+    if(strlen($data) == 0){
+        $data = $defaultJSON;
+    }
+
+    $dataDecoded = json_decode($data);
+    $dataDecoded -> config -> title = $name . " progress results";
+    // print_r($dataDecoded);
+
+    $topK = "show-top-k";
+    //echo gettype($defaultConfigDecoded -> $topK) . "\n\n\n\n";
+
+    $counter = 0;
+    $cap = $defaultConfigDecoded -> $topK;
+    $mapping = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
+    $TEN = 10;
+    $time = date("H:i:sa");
+
+    $currentStandings = new stdClass();
+    $currentStandings -> time = $time;
+
+    foreach($manage as $current){
+        if($counter > $cap){
+            break;
+        }
+
+        $participantName = $current['name'];
+        $score = $current['points'];
+
+        $currentName = "name_" . (($counter >= $TEN) ? (string)($counter + 1) . "th" : $mapping[$counter]);
+        $currentValue = "value_" . (($counter >= $TEN) ? (string)($counter + 1) . "th" : $mapping[$counter]);
+
+        $currentStandings -> $currentName = $participantName;
+        $currentStandings -> $currentValue = $score;
+
+        
+        $counter += 1;
+    }
+    array_push($dataDecoded -> data, $currentStandings);
+
+    //print_r($dataDecoded);
+    fclose($file);
+
+    $file = fopen("../competition_data/$name.json", "w") or die("Unable to open file!");
+    fwrite($file, json_encode($dataDecoded));
+    fclose($file);
+
+    echo "done";
 
 ?>

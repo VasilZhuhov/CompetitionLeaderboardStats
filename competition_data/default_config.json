@@ -1,0 +1,18 @@
+{
+    "title": "Competition results",
+    "animation-duration": 51,
+    "animation-timing-function": "linear",
+    "animation-iteration-count": 1,
+    "animation-fill-mode": "forwards",
+    "title-size": 2,
+    "year-size": 5,
+    "show-top-k": 10,
+    "colors": {
+      "4": "DeepPink",
+      "7": "MidnightBlue",
+      "8": "FireBrick",
+      "14": "DarkViolet"
+    },
+    "popularity-number-change": 20,
+    "top-offset": 5
+  }
