@@ -30,6 +30,17 @@
             $conn->exec($query);
         }
 
+        $query = "SELECT min(id) FROM parsers WHERE name = '$name'";
+        $q = $conn -> query($query);
+        $id = $q -> fetch()[0];
+
+
+
+        $query = "INSERT INTO competitions (name, url, parserId)
+        VALUES ('$name', '$url', '$id')";
+        $conn->exec($query);
+
+
         include '../server/getCompetitionStats.php';
     }
 

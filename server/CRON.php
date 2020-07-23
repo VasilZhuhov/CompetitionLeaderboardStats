@@ -7,6 +7,7 @@
 
     $current_res = fopen("./res.json", "w") or die("Unable to open file!");
     $command = 'node ../server/scriping.js -u "' . $url . '" -n "' . $namePath . '" -p "' . $scorePath . '" -r "' . $rankPath . '"';
+
     $output = shell_exec($command);
     $manage = json_decode($output, true);
     fwrite($current_res, $output);
@@ -16,17 +17,6 @@
 
     include '../helpers/db.php';
     $conn = connectToDatabase();
-
-    $query = "SELECT min(id) FROM parsers WHERE name = '$name'";
-    $q = $conn -> query($query);
-    $id = $q -> fetch()[0];
-
-
-
-    $query = "INSERT INTO competitions (name, url, parserId)
-    VALUES ('$name', '$url', '$id')";
-    $conn->exec($query);
-
 
     // slow af
     foreach($manage as $current){
@@ -40,6 +30,11 @@
     foreach($manage as $current){
         $participantName = $current['name'];
         $query = "SELECT max(id) FROM participants WHERE name = '$participantName'";
+
+        $queryMin = "SELECT min(id) FROM parsers WHERE name = '$name'";
+        $qMin = $conn->query($queryMin);
+        $id = $qMin -> fetch()[0];
+
         $q = $conn -> query($query);
         $participantId = $q -> fetch()[0];
 
