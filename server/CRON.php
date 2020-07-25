@@ -14,17 +14,6 @@
 
         $conn = connectToDatabase();
 
-        $query = "SELECT min(id) FROM parsers WHERE name = '$name'";
-        $q = $conn -> query($query);
-        $id = $q -> fetch()[0];
-
-
-
-        $query = "INSERT INTO competitions (name, url, parserId)
-        VALUES ('$name', '$url', '$id')";
-        $conn->exec($query);
-
-
         // slow af
         foreach($manage as $current){
             $participantName = $current['name'];
@@ -37,13 +26,19 @@
         foreach($manage as $current){
             $participantName = $current['name'];
             $query = "SELECT max(id) FROM participants WHERE name = '$participantName'";
+    
+            $queryMin = "SELECT min(id) FROM parsers WHERE name = '$name'";
+            $qMin = $conn->query($queryMin);
+            $id = $qMin -> fetch()[0];
+    
             $q = $conn -> query($query);
             $participantId = $q -> fetch()[0];
-
+    
             $query = "INSERT INTO competition_participants (competitionId, participantId)
             VALUES ('$id', '$participantId')";
             $conn -> exec($query);
         }
+    
 
         // ---------------------------------------
         // feed data into $name.json
@@ -105,8 +100,5 @@
         fclose($file);
 
         echo "done";
-    }
-    function test(){
-        echo 'working';
     }
 ?>
